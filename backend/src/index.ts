@@ -3,8 +3,14 @@ import * as dotenv from 'dotenv';
 import Restaurantes from '../models/Restaurantes';
 import Avaliações from '../models/Avaliações';
 import Produtos from '../models/Produtos';
+import bodyParser from 'body-parser';
+
 
 const App = express()
+
+App.use(bodyParser.urlencoded({extended: false}))
+App.use(bodyParser.json())
+
 dotenv.config()
 
 // verificando conexão com banco de dados
