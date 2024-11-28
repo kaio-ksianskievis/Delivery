@@ -63,3 +63,11 @@ async function delete_Produtos(req:Request,res:Response) {
         res.status(404)
     }
 }
+
+export {
+    get_Produtos,
+    get_Produtos_Nome,
+    delete_Produtos,
+    update_Produtos,
+    create_Produtos 
+}

@@ -63,3 +63,11 @@ async function delete_Restaurantes(req:Request,res:Response) {
         res.status(404)
     }
 }
+
+export {
+    get_Restaurantes,
+    get_Restaurantes_Nome,
+    delete_Restaurantes,
+    update_Restaurantes,
+    create_Restaurantes
+}
