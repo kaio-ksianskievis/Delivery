@@ -18,9 +18,9 @@ async function get_Restaurantes(req:Request,res:Response){
 
 async function get_Restaurantes_Nome(req:Request,res:Response) {
     try{
-        const name = req.params
-        const obj = await Restaurantes.findOne({where:{Nome:name}})
-        res.json(obj)
+        const Nome = req.params.Nome
+        const obj =  Restaurantes.findOne({where:{Nome:Nome}}).then((obj)=>{res.json(obj)})
+        //res.json(obj)
         res.status(200)
     }catch{
         res.status(404)
@@ -31,9 +31,9 @@ async function get_Restaurantes_Nome(req:Request,res:Response) {
 
 async function update_Restaurantes(req:Request,res:Response) {
     try{
-        const name = req.params
-        const {Nome,Endereço,Avaliação} = req.body
-        await Restaurantes.update({Nome,Endereço,Avaliação},{where: {Nome: name}})
+        const name = req.params.Nome
+        const {Nome,Endereço} = req.body
+        await Restaurantes.update({Nome,Endereço},{where: {Nome: name}})
         res.status(200)
     }catch{
         res.status(400)
@@ -44,8 +44,8 @@ async function update_Restaurantes(req:Request,res:Response) {
 
 async function create_Restaurantes(req:Request,res:Response) {
     try{
-        const obj = req.body
-        await Restaurantes.create(obj)
+        const {Nome,Endereço} = req.body
+        await Restaurantes.create({"Nome":Nome,"Endereço":Endereço})
         res.status(200)
     }catch{
         res.status(400)
@@ -56,8 +56,8 @@ async function create_Restaurantes(req:Request,res:Response) {
 
 async function delete_Restaurantes(req:Request,res:Response) {
     try{
-        const name = req.params
-        await Restaurantes.destroy({where: {Nome: name}})
+        const Nome = req.params.Nome
+        await Restaurantes.destroy({where: {Nome: Nome}})
         res.status(200)
     }catch{
         res.status(404)

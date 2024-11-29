@@ -4,13 +4,14 @@ import Restaurantes from '../models/Restaurantes';
 import Avaliações from '../models/Avaliações';
 import Produtos from '../models/Produtos';
 import bodyParser from 'body-parser';
+import { Router } from 'express';
 
-
+const router = Router()
 const App = express()
 
 App.use(bodyParser.urlencoded({extended: false}))
 App.use(bodyParser.json())
-
+App.use(router)
 dotenv.config()
 
 // verificando conexão com banco de dados
@@ -34,4 +35,4 @@ App.listen(process.env.PORT,()=>{
     console.log("rodando na porta "+process.env.PORT)
 })
 
-export default App
+export  {App,router}

@@ -1,14 +1,14 @@
-import App from "../src";
 import { get_Produtos,get_Produtos_Nome,create_Produtos,delete_Produtos,update_Produtos } from "../services/services_Produtos";
+import { router } from "../src";
 
 //rotas get
 
-App.get("/Produtos",(req,res)=>{
+router.get("/Produtos",(req,res)=>{
 
     get_Produtos(req,res)
 })
 
-App.get("/Produtos/:Nome",(req,res)=>{
+router.get("/Produtos/:Nome",(req,res)=>{
 
     get_Produtos_Nome(req,res)
     
@@ -16,7 +16,7 @@ App.get("/Produtos/:Nome",(req,res)=>{
 
 //rota post
 
-App.post("/Produtos",(req,res)=>{
+router.post("/Produtos",(req,res)=>{
     
     create_Produtos(req,res)
 
@@ -24,7 +24,7 @@ App.post("/Produtos",(req,res)=>{
 
 //rota put
 
-App.put("/Produtos/:id",(req,res)=>{
+router.put("/Produtos/:id",(req,res)=>{
 
     update_Produtos(req,res)
     
@@ -32,7 +32,7 @@ App.put("/Produtos/:id",(req,res)=>{
 
 //rota delete
 
-App.delete("/Produtos/:id",(req,res)=>{
+router.delete("/Produtos/:id",(req,res)=>{
     
     delete_Produtos(req,res)
 

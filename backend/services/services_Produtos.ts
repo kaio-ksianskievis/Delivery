@@ -18,7 +18,7 @@ async function get_Produtos(req:Request,res:Response){
 
 async function get_Produtos_Nome(req:Request,res:Response) {
     try{
-        const name = req.params
+        const name = req.params.Nome
         const obj = await Produtos.findOne({where:{Nome:name}})
         res.json(obj)
         res.status(200)
@@ -31,7 +31,7 @@ async function get_Produtos_Nome(req:Request,res:Response) {
 
 async function update_Produtos(req:Request,res:Response) {
     try{
-        const id = req.params
+        const id = req.params.id
         const {Nome,Descrição,Id_Restaurante} = req.body
         await Produtos.update({Nome,Descrição,Id_Restaurante},{where: {id: id}})
         res.status(200)
@@ -56,7 +56,7 @@ async function create_Produtos(req:Request,res:Response) {
 
 async function delete_Produtos(req:Request,res:Response) {
     try{
-        const id = req.params
+        const id = req.params.id
         await Produtos.destroy({where: {id: id}})
         res.status(200)
     }catch{

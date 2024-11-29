@@ -17,7 +17,7 @@ async function get_Avaliação(req:Request,res:Response){
 
 async function get_Avaliação_id(req:Request,res:Response) {
     try{
-        const Id_Restaurante = req.params
+        const Id_Restaurante = req.params.id
         const obj = await Avaliações.findOne({where:{Id_Restaurante:Id_Restaurante}})
         res.json(obj)
         res.status(200)
@@ -44,7 +44,7 @@ async function create_Avaliação(req:Request,res:Response) {
 
 async function delete_Avaliação(req:Request,res:Response) {
     try{
-        const id = req.params
+        const id = req.params.id
         await Avaliações.destroy({where: {id: id}})
         res.status(200)
     }catch{

@@ -1,15 +1,14 @@
-import App from "../src";
 import { get_Restaurantes,get_Restaurantes_Nome,create_Restaurantes,update_Restaurantes,delete_Restaurantes } from "../services/services_Restaurantes";
-
+import { router } from "../src/index"; 
 
 //rotas get
 
-App.get("/Restaurantes",(req,res)=>{
+router.get("/Restaurantes",(req,res)=>{
 
     get_Restaurantes(req,res)
 })
 
-App.get("/Restaurantes/:Nome",(req,res)=>{
+router.get("/Restaurantes/:Nome",(req,res)=>{
 
     get_Restaurantes_Nome(req,res)
     
@@ -17,7 +16,7 @@ App.get("/Restaurantes/:Nome",(req,res)=>{
 
 //rota post
 
-App.post("/Restaurantes",(req,res)=>{
+router.post("/Restaurantes",(req,res)=>{
     
     create_Restaurantes(req,res)
 
@@ -25,7 +24,7 @@ App.post("/Restaurantes",(req,res)=>{
 
 //rota put
 
-App.put("/Restaurantes/:Nome",(req,res)=>{
+router.put("/Restaurantes/:Nome",(req,res)=>{
 
     update_Restaurantes(req,res)
     
@@ -33,8 +32,10 @@ App.put("/Restaurantes/:Nome",(req,res)=>{
 
 //rota delete
 
-App.delete("/Restaurantes/:Nome",(req,res)=>{
+router.delete("/Restaurantes/:Nome",(req,res)=>{
     
     delete_Restaurantes(req,res)
 
 })
+
+export default router

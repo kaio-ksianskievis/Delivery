@@ -9,10 +9,6 @@ const Restaurantes = DataBase.define("Restaurantes",{
     Endereço:{
         type: DataTypes.STRING,
         allowNull: false
-    },
-    Avaliação:{
-        type: DataTypes.DOUBLE,
-        defaultValue: 0.0
     }
 })
 
