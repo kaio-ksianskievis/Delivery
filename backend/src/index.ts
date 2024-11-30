@@ -4,15 +4,19 @@ import Restaurantes from '../models/Restaurantes';
 import Avaliações from '../models/Avaliações';
 import Produtos from '../models/Produtos';
 import bodyParser from 'body-parser';
-import { Router } from 'express';
 import User from '../models/User';
+import RouterRestaurantes from "../routes/routes_Restaurantes"
+import RouterAvaliações from "../routes/routes_Avaliações"
+import RouterProdutos from "../routes/routes_Produtos"
 
-const router = Router()
 const App = express()
 
 App.use(bodyParser.urlencoded({extended: false}))
 App.use(bodyParser.json())
-App.use(router)
+App.use(RouterRestaurantes)
+App.use(RouterAvaliações)
+App.use(RouterProdutos)
+
 dotenv.config()
 
 // verificando conexão com banco de dados
@@ -24,7 +28,7 @@ try{
     Produtos.sync({force:false})
     User.sync({force: false})
 
-
+ 
 }catch(err){
 
     console.log(`Falha ao criar as tabelas: ${err}`)
@@ -37,4 +41,4 @@ App.listen(process.env.PORT,()=>{
     console.log("rodando na porta "+process.env.PORT)
 })
 
-export  {App,router}
+export  {App}

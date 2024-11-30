@@ -54,8 +54,8 @@ async function update_Restaurantes(req:Request,res:Response) {
 
 async function create_Restaurantes(req:Request,res:Response) {
     try{
-        const {Nome,Endereço} = req.body
-        await Restaurantes.create({"Nome":Nome,"Endereço":Endereço})
+        const {Nome,Endereço,Id_User} = req.body
+        await Restaurantes.create({"Nome":Nome,"Endereço":Endereço,"Id_User":Id_User})
         res.status(200)
     }catch{
         res.status(400).json({"Erro":"Não foi possivel criar esse Restaurante"})

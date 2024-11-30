@@ -46,9 +46,10 @@ async function create_Produtos(req:Request,res:Response) {
     try{
         const Nome_Restaurante = req.params.Nome_Restaurante
         const {Nome,Descrição} = req.body
-        await Produtos.create({Nome:Nome,Descrição:Descrição,Nome_Restaurante:Nome_Restaurante})
+        await Produtos.create({"Nome":Nome,"Descrição":Descrição,"Nome_Restaurante":Nome_Restaurante})
         res.status(200)
-    }catch{
+    }catch(err){
+        console.log(err)
         res.status(400).json({"Erro":"Não foi possivel criar esse produto"})
     }
 }

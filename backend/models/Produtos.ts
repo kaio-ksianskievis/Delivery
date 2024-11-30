@@ -14,7 +14,7 @@ const Produtos = DataBase.define("Produtos",{
     },
 
     Nome_Restaurante: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     }
 })

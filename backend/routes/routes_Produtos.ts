@@ -1,5 +1,7 @@
 import { get_Produtos_Nome_Restaurante,get_Produtos_Nome,create_Produtos,delete_Produtos,update_Produtos } from "../services/services_Produtos";
-import { router } from "../src";
+import { Router } from "express";
+
+const router = Router()
 
 //rotas get
 
@@ -37,3 +39,5 @@ router.delete("/Restaurantes/:Nome_Restaurante/Produtos/:id",(req,res)=>{
     delete_Produtos(req,res)
 
 })
+
+export default router

@@ -6,7 +6,7 @@ import Avaliações from "../models/Avaliações"
 async function get_Avaliação_Nome(req:Request,res:Response) {
     try{
         const Nome = req.params.Nome
-        const obj = await Avaliações.findOne({where:{Nome:Nome}})
+        const obj = await Avaliações.findAll({where:{Nome:Nome}})
         res.status(200).json(obj)
     }catch{
         res.status(404).json({"Erro":"Não foi possivel encontrar as Avaliações"})

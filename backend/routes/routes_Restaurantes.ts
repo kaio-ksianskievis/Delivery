@@ -1,14 +1,20 @@
 import { get_Restaurantes,get_Restaurantes_Nome,create_Restaurantes,update_Restaurantes,delete_Restaurantes } from "../services/services_Restaurantes";
-import { router } from "../src/index"; 
+import { App} from "../src/index"; 
+import { Request,Response,Router } from "express";
+
+const router = Router()
 
 //rotas get
+router.get("/",(req:Request,res:Response)=>{
+    res.send("oi")
+})
 
-router.get("/Restaurantes",(req,res)=>{
+router.get("/Restaurantes",async (req:Request,res:Response)=>{
 
     get_Restaurantes(req,res)
 })
 
-router.get("/Restaurantes/:Nome",(req,res)=>{
+router.get("/Restaurantes/:Nome",(req:Request,res:Response)=>{
 
     get_Restaurantes_Nome(req,res)
     
@@ -16,7 +22,7 @@ router.get("/Restaurantes/:Nome",(req,res)=>{
 
 //rota post
 
-router.post("/Restaurantes",(req,res)=>{
+router.post("/Restaurantes",(req:Request,res:Response)=>{
     
     create_Restaurantes(req,res)
 
