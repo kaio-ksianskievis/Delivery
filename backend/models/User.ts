@@ -9,6 +9,10 @@ const User = DataBase.define("Usuarios",{
     Password: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    Função: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 
 })
