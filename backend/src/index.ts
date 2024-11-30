@@ -5,6 +5,7 @@ import Avaliações from '../models/Avaliações';
 import Produtos from '../models/Produtos';
 import bodyParser from 'body-parser';
 import { Router } from 'express';
+import User from '../models/User';
 
 const router = Router()
 const App = express()
@@ -21,6 +22,7 @@ try{
     Restaurantes.sync({force:false})
     Avaliações.sync({force:false})    
     Produtos.sync({force:false})
+    User.sync({force: false})
 
 
 }catch(err){
