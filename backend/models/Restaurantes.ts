@@ -9,6 +9,10 @@ const Restaurantes = DataBase.define("Restaurantes",{
     Endereço:{
         type: DataTypes.STRING,
         allowNull: false
+    },
+    Id_User: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 })
 

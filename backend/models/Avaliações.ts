@@ -8,8 +8,8 @@ const Avaliações = DataBase.define("Avaliações",{
         allowNull: false
     },
 
-    Id_Restaurante: {
-        type: DataTypes.INTEGER,
+    Nome: {
+        type: DataTypes.STRING,
         allowNull: false
     },
 

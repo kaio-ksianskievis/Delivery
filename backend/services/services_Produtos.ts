@@ -7,10 +7,9 @@ import Produtos from "../models/Produtos";
 async function get_Produtos(req:Request,res:Response){
     try{
         const obj = await Produtos.findAll({raw: true})
-        res.json(obj)
-        res.status(200)
+        res.status(200).json(obj)
     }catch{
-        res.status(500)
+        res.status(500).json({"Erro":"Não foi possivel mostrar os produtos"})
         
     }
 }
@@ -20,10 +19,9 @@ async function get_Produtos_Nome(req:Request,res:Response) {
     try{
         const name = req.params.Nome
         const obj = await Produtos.findOne({where:{Nome:name}})
-        res.json(obj)
-        res.status(200)
+        res.status(200).json(obj)
     }catch{
-        res.status(404)
+        res.status(404).json({"Erro":"Não foi possivel encontrar esse produto"})
     }
 }
 
@@ -36,7 +34,7 @@ async function update_Produtos(req:Request,res:Response) {
         await Produtos.update({Nome,Descrição,Id_Restaurante},{where: {id: id}})
         res.status(200)
     }catch{
-        res.status(400)
+        res.status(400).json({"Erro":"Não foi possivel atualizar esse produto"})
     }
 }
 
@@ -48,7 +46,7 @@ async function create_Produtos(req:Request,res:Response) {
         await Produtos.create(obj)
         res.status(200)
     }catch{
-        res.status(400)
+        res.status(400).json({"Erro":"Não foi possivel criar esse produto"})
     }
 }
 
@@ -60,7 +58,7 @@ async function delete_Produtos(req:Request,res:Response) {
         await Produtos.destroy({where: {id: id}})
         res.status(200)
     }catch{
-        res.status(404)
+        res.status(404).json({"Erro":"Não foi possivel deletar esse produto"})
     }
 }
 
