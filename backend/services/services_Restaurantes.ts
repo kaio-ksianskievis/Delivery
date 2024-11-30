@@ -79,5 +79,6 @@ export {
     get_Restaurantes_Nome,
     delete_Restaurantes,
     update_Restaurantes,
-    create_Restaurantes
+    create_Restaurantes,
+    get_Restaurantes_Id
 }
