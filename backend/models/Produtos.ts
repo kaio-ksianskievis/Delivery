@@ -13,7 +13,7 @@ const Produtos = DataBase.define("Produtos",{
         allowNull: false
     },
 
-    Id_Restaurante: {
+    Nome_Restaurante: {
         type: DataTypes.INTEGER,
         allowNull: false
     }

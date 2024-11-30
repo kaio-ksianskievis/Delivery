@@ -4,9 +4,10 @@ import Produtos from "../models/Produtos";
 
 //busca por todos os Produtos
 
-async function get_Produtos(req:Request,res:Response){
+async function get_Produtos_Nome_Restaurante(req:Request,res:Response){
     try{
-        const obj = await Produtos.findAll({raw: true})
+        const Nome_Restaurante = req.params.Nome_Restaurante
+        const obj = await Produtos.findOne({where:{Nome_Restaurante:Nome_Restaurante}})
         res.status(200).json(obj)
     }catch{
         res.status(500).json({"Erro":"Não foi possivel mostrar os produtos"})
@@ -30,8 +31,9 @@ async function get_Produtos_Nome(req:Request,res:Response) {
 async function update_Produtos(req:Request,res:Response) {
     try{
         const id = req.params.id
-        const {Nome,Descrição,Id_Restaurante} = req.body
-        await Produtos.update({Nome,Descrição,Id_Restaurante},{where: {id: id}})
+        const Nome_Restaurante = req.params.Nome_Restaurante
+        const {Nome,Descrição} = req.body
+        await Produtos.update({Nome,Descrição,Nome_Restaurante},{where: {id: id}})
         res.status(200)
     }catch{
         res.status(400).json({"Erro":"Não foi possivel atualizar esse produto"})
@@ -42,8 +44,9 @@ async function update_Produtos(req:Request,res:Response) {
 
 async function create_Produtos(req:Request,res:Response) {
     try{
-        const obj = req.body
-        await Produtos.create(obj)
+        const Nome_Restaurante = req.params.Nome_Restaurante
+        const {Nome,Descrição} = req.body
+        await Produtos.create({Nome:Nome,Descrição:Descrição,Nome_Restaurante:Nome_Restaurante})
         res.status(200)
     }catch{
         res.status(400).json({"Erro":"Não foi possivel criar esse produto"})
@@ -63,7 +66,7 @@ async function delete_Produtos(req:Request,res:Response) {
 }
 
 export {
-    get_Produtos,
+    get_Produtos_Nome_Restaurante,
     get_Produtos_Nome,
     delete_Produtos,
     update_Produtos,
