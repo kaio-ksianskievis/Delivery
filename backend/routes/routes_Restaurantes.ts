@@ -1,6 +1,6 @@
-import { get_Restaurantes,get_Restaurantes_Nome,create_Restaurantes,update_Restaurantes,delete_Restaurantes } from "../services/services_Restaurantes";
+import { get_Restaurantes,get_Restaurantes_Id,get_Restaurantes_Nome,create_Restaurantes,update_Restaurantes,delete_Restaurantes } from "../services/services_Restaurantes";
 import { Request,Response,Router } from "express";
-
+import { busca_login } from "../authentication/auth";
 const router = Router()
 
 //rotas get
@@ -8,9 +8,15 @@ router.get("/",(req:Request,res:Response)=>{
     res.send("oi")
 })
 
-router.get("/Restaurantes",async (req:Request,res:Response)=>{
+router.get("/Restaurantes",busca_login ,(req:Request,res:Response)=>{
+    const {Função} = req.body
+    
+    if(Função == "vendedor"){
 
-    get_Restaurantes(req,res)
+        get_Restaurantes_Id(req,res)
+    }else{
+        get_Restaurantes(req,res)
+    }
 })
 
 router.get("/Restaurantes/:Nome",(req:Request,res:Response)=>{

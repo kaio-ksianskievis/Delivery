@@ -15,6 +15,7 @@ async function busca_login(req:Request,res:Response,next:NextFunction) {
         compare(Password,data.dataValues.Password,(err,obj)=>{
 
             if(obj){
+                req.body = {"Email":Email,"Password":Password,"Função":Função,"id":data.dataValues.id}
                 next()
             }else{
                 res.status(400).redirect("/login")
