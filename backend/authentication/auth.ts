@@ -9,7 +9,7 @@ async function busca_login(req:Request,res:Response,next:NextFunction) {
     
     const {Email,Password} = req.body
 
-    
+
     const data = await User.findOne({where:{Email:Email}})
 
     if(data != null && data != undefined){
@@ -32,22 +32,40 @@ async function busca_login(req:Request,res:Response,next:NextFunction) {
 
 //gera token
 
-async function gera_toke(req:Request,res:Response) {
+async function gera_token(req:Request,res:Response) {
     
-    const {Email,Password,Função} = req.body
+    const {Email,Password} = req.body
     const data = await User.findOne({where:{Email:Email}})
+
     if(data != null && data != undefined){
 
         compare(Password,data.dataValues.Password,(err,obj)=>{
 
             if(obj){
-                sign({id:data.dataValues.id,Email:Email},process.env.SECRET,{expiresIn:"5h"},(err,token)=>{
-                    if(token){
-                        res.status(200).json({"token":token})
-                    }else{
-                        res.status(500).json({"erro":"falha interna"})
-                    }
-                })
+                
+                //token para vendedores
+
+                if(data.dataValues.Função == "vendedor"){
+
+                    sign({Função:data.dataValues.Função,Email:Email},process.env.SECRET_VENDEDOR,{expiresIn:"5h"},(err,token)=>{
+                        if(token){
+                            res.status(200).json({"token":token})
+                        }else{
+                            res.status(500).json({"erro":"falha interna"})
+                        }
+                    })
+                }else{
+
+                // token usuários
+
+                    sign({Função:data.dataValues.Função,Email:Email},process.env.SECRET_USER,{expiresIn:"5h"},(err,token)=>{
+                        if(token){
+                            res.status(200).json({"token":token})
+                        }else{
+                            res.status(500).json({"erro":"falha interna"})
+                        }
+                    })
+                }
             }else{
                 res.status(400).redirect("/login")
             }
@@ -60,14 +78,15 @@ async function gera_toke(req:Request,res:Response) {
 
 }
 
-// middleware que  confere token
+// middleware que  confere token de usuários
 
-async function auth_token(req:Request,res:Response,next:NextFunction) {
+async function auth_token_user(req:Request,res:Response,next:NextFunction) {
     var token = req.headers.authorization
+
     if(token != undefined && token != null){
         const bearer = token.split(" ")
         token = bearer[1]
-        verify(token,process.env.SECRET,(err,data)=>{
+        verify(token,process.env.SECRET_USER,async(err,data)=>{
             if(data){
                 next()
             }else{
@@ -75,9 +94,28 @@ async function auth_token(req:Request,res:Response,next:NextFunction) {
             }
         })
     }else{
-        
+        res.status(400).send("token não informado")
+    }
+}
+
+//middleware que confere token de vendedores
+
+async function auth_token_vendedor(req:Request,res:Response,next:NextFunction) {
+    var token = req.headers.authorization
+
+    if(token != undefined && token != null){
+        const bearer = token.split(" ")
+        token = bearer[1]
+        verify(token,process.env.SECRET_VENDEDOR,async(err,data)=>{
+            if(data){
+                next()
+            }else{
+                res.status(400).send("token não informado")
+            }
+        })
+    }else{
         res.status(400).send("token inválido")
     }
 }
 
-export {gera_toke,busca_login,auth_token}
+export {gera_token,busca_login,auth_token_user,auth_token_vendedor}

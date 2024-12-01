@@ -16,7 +16,7 @@ router.post("/signup",(req:Request,res:Response)=>{
 
 router.post("/login",(req:Request,res:Response)=>{
 
-
+    res.send("login")
 })
 
 export default router
