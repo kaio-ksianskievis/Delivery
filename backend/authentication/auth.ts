@@ -7,7 +7,9 @@ import { sign,verify } from "jsonwebtoken";
 
 async function busca_login(req:Request,res:Response,next:NextFunction) {
     
-    const {Email,Password,Função} = req.body
+    const {Email,Password} = req.body
+
+    
     const data = await User.findOne({where:{Email:Email}})
 
     if(data != null && data != undefined){
@@ -15,7 +17,7 @@ async function busca_login(req:Request,res:Response,next:NextFunction) {
         compare(Password,data.dataValues.Password,(err,obj)=>{
 
             if(obj){
-                req.body = {"Email":Email,"Password":Password,"Função":Função,"id":data.dataValues.id}
+                req.body = data.dataValues
                 next()
             }else{
                 res.status(400).redirect("/login")
