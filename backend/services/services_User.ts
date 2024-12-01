@@ -13,3 +13,5 @@ async function create_user(req:Request,res:Response) {
     }
     
 }
+
+export default create_user

@@ -8,6 +8,7 @@ import User from '../models/User';
 import RouterRestaurantes from "../routes/routes_Restaurantes"
 import RouterAvaliações from "../routes/routes_Avaliações"
 import RouterProdutos from "../routes/routes_Produtos"
+import RouterUser from "../routes/routes_User"
 
 const App = express()
 
@@ -16,6 +17,7 @@ App.use(bodyParser.json())
 App.use(RouterRestaurantes)
 App.use(RouterAvaliações)
 App.use(RouterProdutos)
+App.use(RouterUser)
 
 dotenv.config()
 

@@ -1,5 +1,4 @@
 import { get_Restaurantes,get_Restaurantes_Nome,create_Restaurantes,update_Restaurantes,delete_Restaurantes } from "../services/services_Restaurantes";
-import { App} from "../src/index"; 
 import { Request,Response,Router } from "express";
 
 const router = Router()
@@ -30,7 +29,7 @@ router.post("/Restaurantes",(req:Request,res:Response)=>{
 
 //rota put
 
-router.put("/Restaurantes/:Nome",(req,res)=>{
+router.put("/Restaurantes/:Nome",(req:Request,res:Response)=>{
 
     update_Restaurantes(req,res)
     
@@ -38,7 +37,7 @@ router.put("/Restaurantes/:Nome",(req,res)=>{
 
 //rota delete
 
-router.delete("/Restaurantes/:Nome",(req,res)=>{
+router.delete("/Restaurantes/:Nome",(req:Request,res:Response)=>{
     
     delete_Restaurantes(req,res)
 
