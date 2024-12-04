@@ -4,7 +4,7 @@ import { hash } from "bcrypt";
 
 //cria usuário
 
-async function create_user(req:Request,res:Response) {
+export async function create_user(req:Request,res:Response) {
     try{
 
         const {Email,Password,Função} = req.body
@@ -26,5 +26,3 @@ async function create_user(req:Request,res:Response) {
     }
     
 }
-
-export default create_user

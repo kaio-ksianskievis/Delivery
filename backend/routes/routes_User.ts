@@ -1,4 +1,4 @@
-import create_user from "../services/services_User";
+import {create_user} from "../services/services_User";
 import { Router,Request,Response } from "express";
 
 const router = Router()

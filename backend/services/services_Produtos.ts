@@ -4,11 +4,13 @@ import Produtos from "../models/Produtos";
 
 //busca por todos os Produtos
 
-async function get_Produtos_Nome_Restaurante(req:Request,res:Response){
+export async function get_Produtos_Nome_Restaurante(req:Request,res:Response){
     try{
+        
         const Nome_Restaurante = req.params.Nome_Restaurante
         const obj = await Produtos.findOne({where:{Nome_Restaurante:Nome_Restaurante}})
         res.status(200).json(obj)
+    
     }catch{
         res.status(500).json({"Erro":"Não foi possivel mostrar os produtos"})
         
@@ -16,7 +18,7 @@ async function get_Produtos_Nome_Restaurante(req:Request,res:Response){
 }
 //busca por um Produto com o parametro nome
 
-async function get_Produtos_Nome(req:Request,res:Response) {
+export async function get_Produtos_Nome(req:Request,res:Response) {
     try{
         const name = req.params.Nome
         const obj = await Produtos.findOne({where:{Nome:name}})
@@ -28,7 +30,7 @@ async function get_Produtos_Nome(req:Request,res:Response) {
 
 // autalizando Produtos
 
-async function update_Produtos(req:Request,res:Response) {
+export async function update_Produtos(req:Request,res:Response) {
     try{
         const id = req.params.id
         const Nome_Restaurante = req.params.Nome_Restaurante
@@ -42,7 +44,7 @@ async function update_Produtos(req:Request,res:Response) {
 
 // criando Produtos
 
-async function create_Produtos(req:Request,res:Response) {
+export async function create_Produtos(req:Request,res:Response) {
     try{
         const Nome_Restaurante = req.params.Nome_Restaurante
         const {Nome,Descrição} = req.body
@@ -56,7 +58,7 @@ async function create_Produtos(req:Request,res:Response) {
 
 // deletando Produtos
 
-async function delete_Produtos(req:Request,res:Response) {
+export async function delete_Produtos(req:Request,res:Response) {
     try{
         const id = req.params.id
         await Produtos.destroy({where: {id: id}})
@@ -66,10 +68,3 @@ async function delete_Produtos(req:Request,res:Response) {
     }
 }
 
-export {
-    get_Produtos_Nome_Restaurante,
-    get_Produtos_Nome,
-    delete_Produtos,
-    update_Produtos,
-    create_Produtos 
-}

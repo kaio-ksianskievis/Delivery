@@ -5,7 +5,7 @@ import { sign,verify } from "jsonwebtoken";
 
 //criando midware para verificação de login
 
-async function busca_login(req:Request,res:Response,next:NextFunction) {
+export async function busca_login(req:Request,res:Response,next:NextFunction) {
     
     const {Email,Password} = req.body
 
@@ -32,7 +32,7 @@ async function busca_login(req:Request,res:Response,next:NextFunction) {
 
 //gera token
 
-async function gera_token(req:Request,res:Response) {
+export async function gera_token(req:Request,res:Response) {
     
     const {Email,Password} = req.body
     const data = await User.findOne({where:{Email:Email}})
@@ -80,7 +80,7 @@ async function gera_token(req:Request,res:Response) {
 
 // middleware que  confere token de usuários
 
-async function auth_token_user(req:Request,res:Response,next:NextFunction) {
+export async function auth_token_user(req:Request,res:Response,next:NextFunction) {
     var token = req.headers.authorization
 
     if(token != undefined && token != null){
@@ -100,7 +100,7 @@ async function auth_token_user(req:Request,res:Response,next:NextFunction) {
 
 //middleware que confere token de vendedores
 
-async function auth_token_vendedor(req:Request,res:Response,next:NextFunction) {
+export async function auth_token_vendedor(req:Request,res:Response,next:NextFunction) {
     var token = req.headers.authorization
 
     if(token != undefined && token != null){
@@ -117,5 +117,3 @@ async function auth_token_vendedor(req:Request,res:Response,next:NextFunction) {
         res.status(400).send("token inválido")
     }
 }
-
-export {gera_token,busca_login,auth_token_user,auth_token_vendedor}
