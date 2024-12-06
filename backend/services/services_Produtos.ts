@@ -7,7 +7,7 @@ import Produtos from "../models/Produtos";
 export async function get_Produtos_Nome_Restaurante(req:Request,res:Response){
     try{
         
-        const Nome_Restaurante = req.params.Nome_Restaurante
+        const Nome_Restaurante = req.params.Nome
         const obj = await Produtos.findOne({where:{Nome_Restaurante:Nome_Restaurante}})
         res.status(200).json(obj)
     

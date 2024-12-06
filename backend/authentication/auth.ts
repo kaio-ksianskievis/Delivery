@@ -3,7 +3,7 @@ import User from "../models/User";
 import { compare } from "bcrypt";
 import { sign,verify } from "jsonwebtoken";
 
-//faz verivicação de login e gera token
+//faz verificação de login e gera token
 
 export async function gera_token(req:Request,res:Response) {
     
@@ -55,7 +55,6 @@ export async function gera_token(req:Request,res:Response) {
 
 export async function auth_token_user(req:Request,res:Response,next:NextFunction) {
     var token = req.headers.authorization
-
     if(token != undefined && token != null){
         const bearer = token.split(" ")
         token = bearer[1]
@@ -85,6 +84,31 @@ export async function auth_token_vendedor(req:Request,res:Response,next:NextFunc
                 next()
             }else{
                 res.status(400).send("token inválido")
+            }
+        })
+    }else{
+        res.status(400).send("token não informado")
+    }
+}
+
+// middleware que  confere token de usuários e vendedores
+
+export async function auth_token(req:Request,res:Response,next:NextFunction) {
+    var token = req.headers.authorization
+    if(token != undefined && token != null){
+        const bearer = token.split(" ")
+        token = bearer[1]
+        verify(token,process.env.SECRET_USER,async(err,data)=>{
+            if(data){
+                next()
+            }else{
+                verify(token,process.env.SECRET_VENDEDOR,async(err,data)=>{
+                    if(data){
+                        next()
+                    }else{
+                        res.status(400).send("token inválido")
+                    }
+                })
             }
         })
     }else{
