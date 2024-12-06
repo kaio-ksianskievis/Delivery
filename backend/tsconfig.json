@@ -7,6 +7,6 @@
       "removeComments": true,
       "preserveConstEnums": true,
       "sourceMap": true,
-      "outDir": "./backend/dist"
+      "outDir": "./dist"
     }
   }

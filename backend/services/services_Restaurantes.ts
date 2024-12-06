@@ -13,6 +13,7 @@ export async function get_Restaurantes(req:Request,res:Response){
         
     }
 }
+
 //busca por um restaurante com o parametro nome
 
 export async function get_Restaurantes_Nome(req:Request,res:Response) {
@@ -29,8 +30,8 @@ export async function get_Restaurantes_Nome(req:Request,res:Response) {
 
 export async function get_Restaurantes_Id(req:Request,res:Response) {
     try{
-        const {id} = req.body
-        const obj = await  Restaurantes.findOne({where:{Id_User:id}})
+        const {Id_User} = req.body
+        const obj = await  Restaurantes.findOne({where:{Id_User:Id_User}})
         res.status(200).json(obj)
     }catch{
         res.status(404).json({"Erro":"Não foi possivel encontrar esse Restaurante"})

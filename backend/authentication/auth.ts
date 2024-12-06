@@ -3,34 +3,7 @@ import User from "../models/User";
 import { compare } from "bcrypt";
 import { sign,verify } from "jsonwebtoken";
 
-//criando midware para verificação de login
-
-export async function busca_login(req:Request,res:Response,next:NextFunction) {
-    
-    const {Email,Password} = req.body
-
-
-    const data = await User.findOne({where:{Email:Email}})
-
-    if(data != null && data != undefined){
-
-        compare(Password,data.dataValues.Password,(err,obj)=>{
-
-            if(obj){
-                req.body = data.dataValues
-                next()
-            }else{
-                res.status(400).redirect("/login")
-            }
-        })
-    }else{
-
-        res.status(400).redirect("/login")
-
-    }
-}
-
-//gera token
+//faz verivicação de login e gera token
 
 export async function gera_token(req:Request,res:Response) {
     
@@ -67,12 +40,12 @@ export async function gera_token(req:Request,res:Response) {
                     })
                 }
             }else{
-                res.status(400).redirect("/login")
+                res.status(400).json({"erro":"Senha ou email inválidos"})
             }
         })
     }else{
 
-        res.status(400).redirect("/login")
+        res.status(400).json({"erro":"não encontramos nenhum usuário com essas credenciais"})
 
     }
 
@@ -108,12 +81,13 @@ export async function auth_token_vendedor(req:Request,res:Response,next:NextFunc
         token = bearer[1]
         verify(token,process.env.SECRET_VENDEDOR,async(err,data)=>{
             if(data){
+                
                 next()
             }else{
-                res.status(400).send("token não informado")
+                res.status(400).send("token inválido")
             }
         })
     }else{
-        res.status(400).send("token inválido")
+        res.status(400).send("token não informado")
     }
 }

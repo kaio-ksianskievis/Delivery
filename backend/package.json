@@ -2,12 +2,12 @@
   "name": "delivery",
   "version": "1.0.0",
   "description": "App baseado em um delivery",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec ts-node ./backend/src/index.ts",
+    "dev": "nodemon --exec ts-node ./src/index.ts",
     "build": "tsc",
-    "start": "node ./backend/dist/src/index.js"
+    "start": "node ./dist/src/index.js"
   },
   "author": "kaio ksianskievis",
   "license": "ISC",
@@ -17,7 +17,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.11.4",
+    "mysql2": "^3.11.5",
     "sequelize": "^6.37.5"
   },
   "devDependencies": {

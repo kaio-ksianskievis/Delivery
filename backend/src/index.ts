@@ -5,20 +5,14 @@ import Avaliações from '../models/Avaliações';
 import Produtos from '../models/Produtos';
 import bodyParser from 'body-parser';
 import User from '../models/User';
-import RouterRestaurantes from "../routes/routes_Restaurantes"
-import RouterAvaliações from "../routes/routes_Avaliações"
-import RouterProdutos from "../routes/routes_Produtos"
-import RouterUser from "../routes/routes_User"
-import RouterAuth from "../routes/routes_auth"
+import router from '../routes/Routes';
+
+
 const App = express()
 
 App.use(bodyParser.urlencoded({extended: false}))
 App.use(bodyParser.json())
-App.use(RouterRestaurantes)
-App.use(RouterAvaliações)
-App.use(RouterProdutos)
-App.use(RouterUser)
-App.use(RouterAuth)
+App.use(router)
 
 dotenv.config()
 
